@@ -41,8 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'account',
     'gymMembership',
+    'ecommerce',
+    'django_filters',
     'rest_framework_simplejwt',# simple jwt
-    "rest_framework_simplejwt.token_blacklist", # add token to blacklist
+    # "rest_framework_simplejwt.token_blacklist", # add token to blacklist
     'rest_framework',# instal  rest_framework
     'corsheaders',# for the react allow cors policy
 ]
@@ -85,7 +87,7 @@ WSGI_APPLICATION = 'gym.wsgi.application'
 
 
 
-DATABASE_URL = 'postgres://default:BKa9yujv6bxh@ep-bitter-unit-99242251.us-east-1.postgres.vercel-storage.com:5432/verceldb'
+DATABASE_URL = 'postgres://pdlaobglwyvtte:7b01da8a4d77591a6a653f3f217db4aaf868330ea38d47945f04d7dc8d45fa21@ec2-54-156-8-21.compute-1.amazonaws.com:5432/d71muj033fk0ol'
 db_config = dj_database_url.config(default=DATABASE_URL, conn_max_age=600)
 
 DATABASES = {
@@ -136,9 +138,9 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'btre/static')
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'btre/static')
+# ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'

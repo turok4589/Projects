@@ -6,6 +6,7 @@ urlpatterns = [
     path('diet/<int:pk>/', views.DietPlanAPIView.as_view(),name="DietPlanAPIView"),
     path('excerise/', views.ExceciseAPIView.as_view(),name="ExceciseAPIView"),
     path('excerise/<int:pk>/', views.ExceciseAPIView.as_view(),name="ExceciseAPIView"),
+    path('filtered-dietplans/', views.DietPlanListView.as_view(), name='filtered-dietplan-list'),
 
    
 

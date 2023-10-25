@@ -15,7 +15,7 @@ class User(AbstractUser):
     phone_no = models.CharField(unique=True,  null=True,max_length=10)
     name = models.CharField(max_length=100,null=True)
     gym_membership = models.BooleanField(default=False)
-    health = models.BooleanField(default=False)
+    fitness = models.BooleanField(default=False)
     auth_provider = models.CharField(max_length=255, blank=False, null=False, default=AUTH_PROVIDERS.get('email'))
     USERNAME_FIELD = 'email'
     objects = CustomUserManager() 

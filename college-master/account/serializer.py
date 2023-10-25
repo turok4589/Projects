@@ -2,13 +2,14 @@ from .models import User
 from rest_framework import serializers
 from rest_framework.exceptions import AuthenticationFailed
 from django.contrib import auth
+from ecommerce.models import Payment
 
 
 # register serializers
 class UserSerializers(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'name','phone_no','email','password','gym_membership','health']
+        fields = ['id', 'name','phone_no','email','password','gym_membership','fitness']
         extra_kwargs = {
             'password' :{'write_only':True}  #  to does not return password in api ## postman
         }
@@ -27,8 +28,9 @@ class UserLoginSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(max_length=255, min_length=3)
     password = serializers.CharField(max_length=68, min_length=6, write_only=True)
     tokens = serializers.SerializerMethodField()
-    health = serializers.BooleanField(read_only=True)
+    fitness = serializers.BooleanField(read_only=True)
     gym_membership = serializers.BooleanField(read_only=True)
+    payment_status = serializers.BooleanField(read_only=True)
 
    
     def get_tokens(self, obj):
@@ -38,17 +40,23 @@ class UserLoginSerializer(serializers.ModelSerializer):
             'access': user.tokens()['access']
         }
 
-    # Include 'health' and 'gym_membership' only if they are True
-        if user.health:
-            tokens_data['health'] = user.health
+    # Include 'fitness' and 'gym_membership' only if they are True
+        if user.fitness:
+            tokens_data['fitness'] = user.fitness
         if user.gym_membership:
             tokens_data['gym_membership'] = user.gym_membership
+        
+        latest_payment = Payment.objects.filter(user=user).last()
+        if latest_payment:
+            tokens_data['payment_status'] = latest_payment.status
+        else:
+            tokens_data['payment_status'] = False
 
         return tokens_data
 
     class Meta:
         model = User
-        fields = ['email', 'password', 'tokens', 'health', 'gym_membership']
+        fields = ['email', 'password', 'tokens', 'fitness', 'gym_membership','payment_status']
 
     def validate(self, attrs):
         email = attrs.get('email', '')
@@ -65,8 +73,8 @@ class UserLoginSerializer(serializers.ModelSerializer):
         return {
             'email': user.email,
             'tokens': user.tokens,
-            # 'health': user.health,
-            # 'gym_membership': user.gym_membership
+            #'payment_status': Payment.objects.filter(user=user).last().status if user else None,
+         
         }
 
         return super().validate(attrs)

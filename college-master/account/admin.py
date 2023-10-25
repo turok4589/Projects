@@ -15,7 +15,7 @@ class customUserAdmin(UserAdmin):
       (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
                                                 ),}),
       (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
-        (_('user_info'), {'fields': ( 'phone_no','gym_membership','health',)}),
+        (_('user_info'), {'fields': ( 'phone_no','gym_membership','fitness',)}),
   )
   add_fieldsets = (
       (None, {
