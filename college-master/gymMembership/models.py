@@ -11,6 +11,7 @@ class DietPlan(models.Model):
     ]
     body_mass_index = models.IntegerField(null=True)
     body = models.CharField(max_length=100, choices=BODY_CHOICES)
+    calories = models.IntegerField(null=True,blank=True)
     morningPlan = models.TextField()
     morningPlanImage = models.URLField(blank=True)
     afternoonPlan = models.TextField()

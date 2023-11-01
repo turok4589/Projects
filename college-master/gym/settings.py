@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'account',
     'gymMembership',
     'ecommerce',
+    'chatbotapis',
     'django_filters',
     'rest_framework_simplejwt',# simple jwt
     # "rest_framework_simplejwt.token_blacklist", # add token to blacklist

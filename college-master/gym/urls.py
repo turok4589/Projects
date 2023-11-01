@@ -24,6 +24,7 @@ urlpatterns = [
     path('account/',include('account.urls')),
     path('gym/',include('gymMembership.urls')),
     path('ecomerce/',include('ecommerce.urls')),
+    path('chatbot/',include('chatbotapis.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 admin.site.site_header = 'GYM'
