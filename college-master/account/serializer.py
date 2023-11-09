@@ -9,7 +9,8 @@ from ecommerce.models import Payment
 class UserSerializers(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'name','phone_no','email','password','gym_membership','fitness']
+        fields = ['id', 'name','phone_no','email','password','gym_membership','fitness','country','state','city',
+                                     'delivery_address','delivery_address_pincode']
         extra_kwargs = {
             'password' :{'write_only':True}  #  to does not return password in api ## postman
         }

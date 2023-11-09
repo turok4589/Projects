@@ -16,6 +16,12 @@ class User(AbstractUser):
     name = models.CharField(max_length=100,null=True)
     gym_membership = models.BooleanField(default=False)
     fitness = models.BooleanField(default=False)
+
+    country = models.CharField(max_length=100,blank=True)
+    state = models.CharField(max_length=100,blank=True)
+    city = models.CharField(max_length=100,blank=True)
+    delivery_address = models.CharField(max_length=100,blank=True)
+    delivery_address_pincode = models.IntegerField(null=True,blank=True)
     auth_provider = models.CharField(max_length=255, blank=False, null=False, default=AUTH_PROVIDERS.get('email'))
     USERNAME_FIELD = 'email'
     objects = CustomUserManager() 

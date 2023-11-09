@@ -14,9 +14,7 @@ class Product(models.Model):
 
 class Order(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    product = models.ForeignKey(Product,on_delete=models.CASCADE)
-    delivery_address = models.CharField(max_length=100,blank=True)
-    delivery_address_pincode = models.IntegerField(null=True,blank=True)
+    product = models.ForeignKey(Product,on_delete=models.CASCADE,null=True)
     quantity = models.IntegerField(null=True)
     created = models.DateField(auto_now=True)
 
@@ -26,7 +24,7 @@ class Payment(models.Model):
         ('monthly', 'Monthly Subscription'),
         ('yearly', 'Yearly Subscription'),
     ]
-    order = models.ForeignKey(Order,on_delete=models.CASCADE,null=True,blank=True)
+    order = models.CharField(null=True,blank=True,max_length=100)
     subscription = models.CharField(max_length=100,choices=SUBSCRIPTION_CHOICES,blank=True)
     user = models.ForeignKey(User,on_delete=models.CASCADE,null=True,blank=True)
     card_no = models.BigIntegerField(null=True,blank=True)
@@ -42,9 +40,8 @@ class Payment(models.Model):
 
 class OrderHistory(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    product = models.ForeignKey(Product,on_delete=models.CASCADE)
-    delivery_address = models.CharField(max_length=100,blank=True)
-    delivery_address_pincode = models.IntegerField(null=True,blank=True)
+    product = models.ForeignKey(Product,on_delete=models.CASCADE,null=True)
+   
     quantity = models.IntegerField(null=True)
     created = models.DateField(auto_now=True)
 

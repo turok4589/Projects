@@ -38,13 +38,19 @@ class OrderSerializer(ModelSerializer):
 class OrderSerializerPost(ModelSerializer):
     class Meta:
         model = Order
-        fields = '__all__'
+        fields = ["user","product","created","quantity","id"]
 
 
 class OrderHistorySerializerPost(ModelSerializer):
     class Meta:
         model = OrderHistory
-        fields = '__all__'
+        #fields = '__all__'
+        fields = ["user","product","created","quantity","id"]
+    def to_representation(self, instance):
+        response = super().to_representation(instance)
+        response['product'] = ProductSerializer(instance.product).data
+       
+        return response
 
 class PaymentSerializer(ModelSerializer):
     class Meta:
@@ -52,6 +58,6 @@ class PaymentSerializer(ModelSerializer):
         fields = "__all__"
     def to_representation(self, instance):
         response = super().to_representation(instance)
-        response['order'] = OrderSerializer(instance.order).data
+        # response['order'] = OrderSerializer(instance.order).data
         response['user'] = UserSerializers(instance.user).data
         return response

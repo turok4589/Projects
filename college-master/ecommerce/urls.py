@@ -8,6 +8,9 @@ urlpatterns = [
     path('order/<int:pk>/', views.OrderAPIView.as_view(),name="OrderAPIView"),
     path('payment/', views.PaymentAPIView.as_view(),name="PaymentAPIView"),
     path('payment/<int:pk>/', views.PaymentAPIView.as_view(),name="PaymentAPIView"),
+    path('history/', views.OrderHistoryAPIView.as_view(),name="OrderHistoryAPIView"),
+
+    
 
 
    
